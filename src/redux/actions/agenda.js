@@ -1,3 +1,4 @@
+import uuidv1 from 'uuid';
 const getDate = (date) => ({
     type: 'GET_DATE_NOW',
     payload: {
@@ -31,6 +32,7 @@ const getDate = (date) => ({
     type: 'CREATE_AGENDA',
     payload: {
       date,
+      id:uuidv1(),
       name: value.name,
       description: value.description
     }

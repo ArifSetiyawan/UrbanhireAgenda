@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import { modalVisibleSet } from '../redux/actions/agenda';
+import { modalVisibleSet ,modalVisibleAgendaList} from '../redux/actions/agenda';
 import AgendaCreate from './AgendaForms';
 import AgendaList from './AgendaList';
 
@@ -12,23 +12,39 @@ class AgendaModal extends Component {
     this.props.dispatch(modalVisibleSet(visible))
   }
 
+  handleVisibleModalList(visible,date){
+    this.props.dispatch(modalVisibleAgendaList(visible,date))
+  }
+  
+
   render() {
-    return (
-      <Modal
-        visible={this.props.agenda.modalVisible}
-        animationType={this.props.agenda.modal==='createAgenda'? 'fade':'slide'}
-        transparent={true}
-        onRequestClose={() => this.handleVisibleModal(false)}
-      >
-        <View style={styles.container}>
-          {this.props.agenda.modal==='createAgenda'? (
-            <AgendaCreate />
-          ):(
-            <AgendaList />
-          )}
-        </View>
-      </Modal>
-    );
+    if (this.props.agenda.modal==='createAgenda') {
+      return(
+        <Modal
+          visible={this.props.agenda.modalVisible}
+          animationType={this.props.agenda.modal==='createAgenda'? 'fade':'slide'}
+          transparent={true}
+          onRequestClose={() => this.handleVisibleModal(false)}
+        >
+          <View style={styles.container}>
+              <AgendaCreate />
+          </View>
+        </Modal>
+      )
+    } else {
+      return(
+        <Modal
+          visible={this.props.agenda.modalVisible}
+          animationType={this.props.agenda.modal==='listEvents'? 'fade':'slide'}
+          transparent={true}
+          onRequestClose={() => this.handleVisibleModalList(false,this.props.agenda.selectedDate)}
+        >
+          <View style={styles.container}>
+              <AgendaList />
+          </View>
+        </Modal>
+      )
+    }
   }
 }
 

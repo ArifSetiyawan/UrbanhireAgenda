@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { connect } from 'react-redux';
 
-import { getDate , modalVisibleSet } from '../redux/actions/agenda';
+import { getDate , modalVisibleSet ,modalVisibleAgendaList } from '../redux/actions/agenda';
 
 class Agenda extends Component {
 
@@ -27,6 +27,9 @@ class Agenda extends Component {
   }
 
   handleDayPress(day){
+    this.props.dispatch(modalVisibleSet(true,'createAgenda',day))
+  }
+  handleDayPressed(day){
     this.props.dispatch(modalVisibleSet(true,'listEvents',day))
   }
 
@@ -34,6 +37,7 @@ class Agenda extends Component {
     return (
       <Calendar
         onDayPress={(day) => this.handleDayPress(day.dateString)}
+        onDayLongPress={(day) => this.handleDayPressed(day.dateString)}
         markedDates={this.props.agenda.markedDate}
         style = {
           {
