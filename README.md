@@ -2,14 +2,6 @@
 
 *This agenda calendar application is an application that functions to create and display agenda items that you want to do every day. this application uses reactnative technology which is currently being widely used to create an android / IOS based application.*
 
-
-
-![Calendar](./src/assets/showsup/calendars.png "This Calendar")
-![Create Agenda](./src/assets/showsup/created.png "Create Agenda")
-![Days_without_agenda](./src/assets/showsup/notagenda.png "Days without agenda")
-![Shows_agenda](./src/assets/showsup/show.png "Shows Agenda")
-
-
 ## Installation
 
 **Step 1:** Clone this repo, `git clone https://github.com/ArifSetiyawan/UrbanhireAgenda.git <your project name>`
