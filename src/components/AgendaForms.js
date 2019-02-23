@@ -2,32 +2,25 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { Icon } from 'native-base';
 
-import { modalVisibleEventset , createAgenda , modalVisibleSet } from '../../redux/actions/agenda';
-import Input from '../components/TextInput';
-import uuidv1 from 'uuid';
-class AgendaForm extends Component {
+import { modalVisibleAgendaList , modalVisibleSet , createAgenda } from '../redux/actions/agenda';
+import Input from './redux-form/Input';
+
+class AgendaCreateForm extends Component {
 
   handleVisibleModal(visible){
-    if(this.props.agenda.modalVisibleEventset){
-      this.props.dispatch(modalVisibleEventset(visible, this.props.agenda.selectedDate))
+    if(this.props.agenda.modalVisibleAgenda){
+      this.props.dispatch(modalVisibleAgendaList(visible, this.props.agenda.selectedDate))
     } else {
       this.props.dispatch(modalVisibleSet(visible))
     }
   }
 
   handleCreate = (value) => {
-        const name = value.name
-        const description = value.description
-        const data = {
-            id :uuidv1(),
-            name :name,
-            description :description,
-            selectedDate: this.props.agenda.selectedDate
-        }
-    this.props.dispatch(createAgenda(data))
-    if(this.props.agenda.modalVisibleEventset){
-      this.props.dispatch(modalVisibleSetEventset(false, this.props.agenda.selectedDate))
+    this.props.dispatch(createAgenda(value,this.props.agenda.selectedDate))
+    if(this.props.agenda.modalVisibleAgenda){
+      this.props.dispatch(modalVisibleAgendaList(false, this.props.agenda.selectedDate))
     } else {
       this.props.dispatch(modalVisibleSet(false))
     }
@@ -37,22 +30,16 @@ class AgendaForm extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
+          <Text style={styles.titleHeader}>New Agenda</Text>
           <TouchableOpacity onPress={() => this.handleVisibleModal(false)}>
-            <Text style={[styles.textButton, {color: '#e74c3c'}]}>Cancel</Text>
+            <Icon name='cross' type='Entypo' style={styles.iconButtonClose} />
           </TouchableOpacity>
-          <Text style={styles.titleHeader}>New Events</Text>
-          {this.props.pristine? (
-            <Text style={[styles.textButton, {textAlign: 'right', color: '#dadada'}]}>Create</Text>
-          ):(
-            <TouchableOpacity onPress={this.props.handleSubmit(this.handleCreate)}>
-              <Text style={[styles.textButton, {textAlign: 'right'}]}>Create</Text>
-            </TouchableOpacity>
-          )}
         </View>
         <View style={styles.form}>
+        <Icon name='calendar' type='Entypo' style={styles.iconButtonDate}> {this.props.agenda.selectedDate} </Icon>
           <Field
             name='name'
-            placeholder='Events Name'
+            placeholder='Agenda Name'
             height={40}
             component={Input}
           />
@@ -64,8 +51,14 @@ class AgendaForm extends Component {
             numberOfLines={5}
             component={Input}
           />
-          <Text style={{textAlign: 'center', marginVertical: 10}}>{this.props.agenda.selectedDate}</Text>
         </View>
+        {this.props.pristine? (
+            <Text style={[styles.textButton, {textAlign: 'left', color: '#dadada',marginVertical: 10,fontSize:17}]}>Create</Text>
+          ):(
+            <TouchableOpacity onPress={this.props.handleSubmit(this.handleCreate)}>
+              <Text style={[styles.textButton, {textAlign: 'left', marginVertical: 10,fontSize:17}]}>Create</Text>
+            </TouchableOpacity>
+          )}
       </View>
     );
   }
@@ -89,9 +82,19 @@ const styles = StyleSheet.create({
   titleHeader: {
     fontWeight: 'bold'
   },
+  iconButtonClose: {
+    color: 'red',
+    fontSize: 21
+  },
+  iconButtonDate: {
+    color: 'black',
+    fontSize: 11, 
+    marginVertical: 8
+  },
   textButton: {
     color: '#2ecc71',
-    width: 50
+    width: 50,
+    alignSelf: 'flex-end',
   },
   form: {
     paddingHorizontal: 5
@@ -102,4 +105,4 @@ const mapStateToProps = (state) => ({
   agenda: state.agenda
 })
 
-export default reduxForm({form: 'createAgenda'})(connect(mapStateToProps)(AgendaForm));
+export default reduxForm({form: 'createAgenda'})(connect(mapStateToProps)(AgendaCreateForm));

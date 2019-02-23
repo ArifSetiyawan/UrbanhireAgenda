@@ -4,16 +4,16 @@ import { TextInput, StyleSheet } from 'react-native';
 class Input extends Component {
 
   render() {
-    const {height, multiline, numberOfLines } = this.props
+    const { input, placeholder, height, multiline, numberOfLines } = this.props
 
     return (
       <TextInput
-        placeholder={this.props.placeholder}
-        onChangeText={this.props.input.onChange}
+        placeholder={placeholder}
         style={[styles.input, {height: height}]}
         multiline={multiline || false}
         numberOfLines={numberOfLines || 1}
-        value={this.props.input.value}
+        onChangeText={input.onChange}
+        value={input.value}
       />
     );
   }

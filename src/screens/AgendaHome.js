@@ -3,11 +3,11 @@ import { View, TouchableOpacity, Text, StyleSheet, StatusBar } from 'react-nativ
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 
-import Agenda from '../components/Agenda';
-import Modals from '../components/modal';
-import { modalVisibleSet } from '../../redux/actions/agenda';
+import AgendaCalendars from '../components/AgendaCalendars';
+import AgendaModals from '../components/AgendaModals';
+import { modalVisibleSet } from '../redux/actions/agenda';
 
-class Agendas extends Component {
+class Agenda extends Component {
 
   handleVisibleModal(visible,modal,date){
     this.props.dispatch(modalVisibleSet(visible,modal,date))
@@ -16,15 +16,12 @@ class Agendas extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor='#3498db' barStyle="light-content" />
+        <StatusBar backgroundColor='#ff0f0f' barStyle="dark-content" />
         <View style={styles.header}>
-          <Text style={styles.titleHeader}>Urbanhire Calendar Agenda</Text>
+          <Text style={styles.titleHeader}>Urbanhire Calendars Agenda</Text>
         </View>
-        <Agenda />
-        <Modals />
-        <TouchableOpacity onPress={() => this.handleVisibleModal(true,'createAgenda',this.props.agenda.dateNow)} style={styles.button}>
-          <Icon name='plus' type='AntDesign' style={styles.iconButton} />
-        </TouchableOpacity>
+        <AgendaCalendars />
+        <AgendaModals />
       </View>
     );
   }
@@ -53,13 +50,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     height: 50,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#ff0f0f',
     borderBottomColor: '#e4e4e4',
     borderBottomWidth: 0.5
   },
   titleHeader: {
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    color:"white"
   }
 })
 
@@ -67,4 +65,4 @@ const mapStateToProps = (state) => ({
   agenda: state.agenda
 })
 
-export default connect(mapStateToProps)(Agendas);
+export default connect(mapStateToProps)(Agenda);

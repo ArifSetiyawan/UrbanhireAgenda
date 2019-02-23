@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import { reducer as reducerForm } from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 
-import agenda from './agenda';
+import agendaReducers from './agendas';
 
 const reducers = combineReducers({
-  form: reducerForm,
-  agenda: agenda
+  form: formReducer,
+  agenda: agendaReducers
 });
 
 export default reducers;

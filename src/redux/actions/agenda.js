@@ -1,53 +1,44 @@
-export const createAgenda = (value, date) => {
-  return {
+const getDate = (date) => ({
+    type: 'GET_DATE_NOW',
+    payload: {
+      markedDate: {
+        [date]: {
+          selected: true
+        }
+      },
+      date
+    }
+  });
+  
+  const modalVisibleSet = (visible,modal = '',date) => ({
+    type: 'MODAL_VISIBLE_SET',
+    payload: {
+      visible,
+      modal,
+      date
+    }
+  })
+  
+  const modalVisibleAgendaList = (visible,date) => ({
+    type: 'MODAL_VISIBLE_AGENDA_LIST',
+    payload: {
+      visible,
+      date
+    }
+  })
+  
+  const createAgenda = (value,date) => ({
     type: 'CREATE_AGENDA',
     payload: {
       date,
       name: value.name,
       description: value.description
     }
+  })
+  
+  export {
+    getDate,
+    modalVisibleSet,
+    createAgenda,
+    modalVisibleAgendaList
   }
-}
-
-  export const getDate = (date) => {
-    return {
-      type: 'GET_DATE_NOW',
-      payload: {
-        markedDate: {
-          [date]: {
-            selected: true
-          }
-        },
-        date
-      }
-    }
-  }
-
-export const deleteAgenda = (data) => {
-  return {
-    type: 'DELETE_AGENDA',
-    payload: data
-  }
-}
-export const modalVisibleSet = (visible,modal = '',date) => ({
-  type: 'SET_MODAL_VISIBLE',
-  payload: {
-    visible,
-    modal,
-    date
-  }
-})
-
-export const modalVisibleEventset = (visible,date) => ({
-  type: 'SET_MODAL_VISIBLE_EVENT',
-  payload: {
-    visible,
-    date
-  }
-})
-export const updateAgenda = (data) => {
-  return {
-    type:'EDIT_AGENDA',
-    payload:data
-  }
-}

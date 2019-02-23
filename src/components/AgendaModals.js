@@ -1,14 +1,13 @@
-import React, { Fragment, Component } from 'react';
-import { Modal, View, StyleSheet, Text } from 'react-native';
-import Button from "./button";
+import React, { Component } from 'react';
+import { Modal, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import { modalVisibleSet } from '../../redux/actions/agenda';
-import AgendaForm from '../screens/AgendaCreate';
-import AgendaList from '../screens/AgendaList';
+import { modalVisibleSet } from '../redux/actions/agenda';
+import AgendaCreate from './AgendaForms';
+import AgendaList from './AgendaList';
 
+class AgendaModal extends Component {
 
-class NativeModal extends Component {
   handleVisibleModal(visible){
     this.props.dispatch(modalVisibleSet(visible))
   }
@@ -23,7 +22,7 @@ class NativeModal extends Component {
       >
         <View style={styles.container}>
           {this.props.agenda.modal==='createAgenda'? (
-            <AgendaForm />
+            <AgendaCreate />
           ):(
             <AgendaList />
           )}
@@ -46,4 +45,4 @@ const mapStateTopProps = (state) => ({
   agenda: state.agenda
 })
 
-export default connect(mapStateTopProps)(NativeModal);
+export default connect(mapStateTopProps)(AgendaModal);

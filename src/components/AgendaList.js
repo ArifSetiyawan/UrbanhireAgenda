@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal,Image} from 'react-native';
 import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 
-import { modalVisibleEventset , modalVisibleSet } from '../../redux/actions/agenda';
-import AgendaForm from './AgendaCreate';
+import { modalVisibleAgendaList, modalVisibleSet } from '../redux/actions/agenda';
+import AgendaCreate from './AgendaForms';
 
 class AgendaList extends Component {
 
   handleVisibleModal(visible,date){
-    this.props.dispatch(modalVisibleEventset(visible,date))
+    this.props.dispatch(modalVisibleAgendaList(visible,date))
   }
 
   handleCloseModal(){
@@ -29,27 +29,29 @@ class AgendaList extends Component {
 
   render() {
 
-    let events = this.props.agenda.events.filter(item => {
+    let agendas = this.props.agenda.agendas.filter(item => {
       return item.date === this.props.agenda.selectedDate
     })
 
-    events = events.reverse()
+    agendas = agendas.reverse()
 
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.buttonClose} onPress={() => this.handleCloseModal()}>
-            <Icon name='down' type='AntDesign' style={styles.iconButtonClose} />
+            <Icon name='chevron-down' type='Entypo' style={styles.iconButtonClose} />
           </TouchableOpacity>
-          <Text style={styles.titleHeader}>{this.props.agenda.selectedDate}</Text>
+          <Text style={styles.titleHeader}> {this.props.agenda.selectedDate} </Text>
         </View>
-        {events.length === 0 ? (
-          <View style={{flex: 1, alignItems: 'center', marginTop: '50%'}}>
-            <Text style={{textAlign: 'center'}}>Empty</Text>
+        {
+          agendas.length === 0 ? (
+          <View style={{flex: 1}}>
+          <Image source={require('../assets/image/datanot.png')} 
+            style={styles.background} />
           </View>
         ):(
           <FlatList
-            data={events}
+            data={agendas}
             keyExtractor={(item,index) => index.toString()}
             renderItem={this._renderItem}
           />
@@ -58,13 +60,13 @@ class AgendaList extends Component {
           <Icon name='plus' type='AntDesign' style={styles.iconButton} />
         </TouchableOpacity>
         <Modal
-          visible={this.props.agenda.modalVisibleEventset}
+          visible={this.props.agenda.modalVisibleAgenda}
           animationType='fade'
           transparent={true}
           onRequestClose={() => this.handleVisibleModal(false, this.props.agenda.selectedDate)}
         >
           <View style={styles.containerModal}>
-            <AgendaForm />
+            <AgendaCreate />
           </View>
         </Modal>
       </View>
@@ -86,14 +88,17 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   titleHeader: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 26,
+    textAlign: 'center',
+    justifyContent: 'center'
   },
   buttonClose: {
     marginRight: 10
   },
   iconButtonClose: {
-    color: '#f39c12',
-    fontSize: 20
+    color: 'black',
+    fontSize: 26
   },
   button: {
     backgroundColor: '#2ecc71',
@@ -130,7 +135,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.1)'
-  }
+  },
+  background: {
+    width: '100%',
+    backgroundColor:"white"
+},
 })
 
 const mapStateToProps = (state) => ({
