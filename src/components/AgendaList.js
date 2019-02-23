@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal,Image} from 'react-native';
-import { Icon } from 'native-base';
+import { Icon ,Container,Content,Card,CardItem,Body, H2 } from 'native-base';
 import { connect } from 'react-redux';
 
 import { modalVisibleAgendaList, modalVisibleSet } from '../redux/actions/agenda';
@@ -17,14 +17,16 @@ class AgendaList extends Component {
   }
 
   _renderItem = ({item}) => (
-    <View style={styles.containerItem}>
-      <View style={styles.headerItem}>
-        <Text>{item.name}</Text>
-      </View>
-      <View style={styles.contentItem}>
-        <Text style={{fontSize: 12}}>{item.description}</Text>
-      </View>
-    </View>
+        <Card style={styles.containerItem}>
+          <CardItem style={styles.contentItem}>
+            <Body>
+              <Text style={{fontWeight:"bold",fontSize:20,color:'white'}}>{item.name}</Text>
+            </Body>
+          </CardItem>
+          <CardItem style={styles.contentItem}>
+              <Text note style={{color:'white'}}>{item.description}</Text>
+          </CardItem>
+        </Card>
   )
 
   render() {
@@ -41,14 +43,28 @@ class AgendaList extends Component {
           <TouchableOpacity style={styles.buttonClose} onPress={() => this.handleCloseModal()}>
             <Icon name='chevron-down' type='Entypo' style={styles.iconButtonClose} />
           </TouchableOpacity>
-          <Text style={styles.titleHeader}> {this.props.agenda.selectedDate} </Text>
+          <H2 style={styles.titleHeader}> Your agenda today</H2><Icon name='emoji-happy' type='Entypo' style={styles.iconButtonClose} />
         </View>
         {
           agendas.length === 0 ? (
           <View style={{flex: 1}}>
-          <Image source={require('../assets/image/datanot.png')} 
-            style={styles.background} />
+            <Image source={require('../assets/image/datanot.png')} 
+              style={styles.background} />
+            <TouchableOpacity onPress={() => this.handleVisibleModal(true,this.props.agenda.selectedDate)} style={styles.button}>
+              <Icon name='plus' type='AntDesign' style={styles.iconButton} />
+            </TouchableOpacity>
+            <Modal
+              visible={this.props.agenda.modalVisibleAgenda}
+              animationType='fade'
+              transparent={true}
+              onRequestClose={() => this.handleVisibleModal(false, this.props.agenda.selectedDate)}
+            >
+              <View style={styles.containerModal}>
+                <AgendaCreate />
+              </View>
+            </Modal>
           </View>
+          
         ):(
           <FlatList
             data={agendas}
@@ -56,19 +72,6 @@ class AgendaList extends Component {
             renderItem={this._renderItem}
           />
         )}
-        <TouchableOpacity onPress={() => this.handleVisibleModal(true,this.props.agenda.selectedDate)} style={styles.button}>
-          <Icon name='plus' type='AntDesign' style={styles.iconButton} />
-        </TouchableOpacity>
-        <Modal
-          visible={this.props.agenda.modalVisibleAgenda}
-          animationType='fade'
-          transparent={true}
-          onRequestClose={() => this.handleVisibleModal(false, this.props.agenda.selectedDate)}
-        >
-          <View style={styles.containerModal}>
-            <AgendaCreate />
-          </View>
-        </Modal>
       </View>
     );
   }
@@ -90,8 +93,11 @@ const styles = StyleSheet.create({
   titleHeader: {
     fontWeight: 'bold',
     fontSize: 26,
+    alignSelf:'center',
+    alignItems:'center',
     textAlign: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginRight:10
   },
   buttonClose: {
     marginRight: 10
@@ -115,9 +121,9 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   containerItem: {
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    marginTop: 10,
+    backgroundColor: '#ff0f0f',
+    borderColor:'#ff0f0f',
+    borderRadius: 6,
     alignSelf: 'center',
     width: '90%'
   },
@@ -129,6 +135,7 @@ const styles = StyleSheet.create({
   },
   contentItem: {
     padding: 10,
+    backgroundColor: '#ff0f0f'
   },
   containerModal: {
     flex: 1,

@@ -39,7 +39,7 @@ class AgendaCreateForm extends Component {
         <Icon name='calendar' type='Entypo' style={styles.iconButtonDate}> {this.props.agenda.selectedDate} </Icon>
           <Field
             name='name'
-            placeholder='Agenda Name'
+            placeholder='Agenda'
             height={40}
             component={Input}
           />

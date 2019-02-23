@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Calendar } from 'react-native-calendars';
 import { connect } from 'react-redux';
 
-import { getDate , modalVisibleSet ,modalVisibleAgendaList } from '../redux/actions/agenda';
+import { getDate , modalVisibleSet } from '../redux/actions/agenda';
 
 class Agenda extends Component {
 
@@ -48,15 +48,11 @@ class Agenda extends Component {
         }
         theme = {
           {
-            arrowColor: 'blue',
+            todayTextColor: '#ff0f0f',
+            arrowColor: '#ff0f0f',
             monthTextColor: 'black',
-            textDayFontFamily: 'monospace',
-            textMonthFontFamily: 'monospace',
-            textDayHeaderFontFamily: 'monospace',
-            textMonthFontWeight: 'bold',
-            textDayFontSize: 16,
-            textMonthFontSize: 16,
-            textDayHeaderFontSize: 16
+            dotColor: '#ff0f0f',
+            selectedDotColor: '#00adf5',
           }
         }
       />
