@@ -1,2 +1,2 @@
 # UrbanhireAgenda
-UrbanHire Agenda With ReactJS and Reactnative
+UrbanHire Agenda With Reactnative
