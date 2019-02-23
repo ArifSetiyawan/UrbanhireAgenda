@@ -10,13 +10,11 @@
 ![Shows_agenda](./src/assets/showsup/show.png "Shows Agenda")
 
 
-
-
 ## Installation
 
-**Step 1:** clone my repo & cd into project
+**Step 1:** Clone this repo, `git clone https://github.com/ArifSetiyawan/UrbanhireAgenda.git <your project name>` & cd into project
 
-**Step 2:** install node modules
+**Step 2:** install node modules dependencies
 
 ```
 npm install or using yarn install
@@ -24,7 +22,7 @@ npm install or using yarn install
 
 *Before run android build, setup [Android Studio](https://facebook.github.io/react-native/docs/android-setup.html)*
 
-**Step 3:** run apps React Native
+**Step 3:** Run apps React Native
 
 ```
 react-native run-android
