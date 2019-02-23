@@ -12,9 +12,11 @@
 
 ## Installation
 
-**Step 1:** Clone this repo, `git clone https://github.com/ArifSetiyawan/UrbanhireAgenda.git <your project name>` & cd into project
+**Step 1:** Clone this repo, `git clone https://github.com/ArifSetiyawan/UrbanhireAgenda.git <your project name>`
 
-**Step 2:** install node modules dependencies
+**Step 2:** Go to project's root directory, `cd <your project name>`
+
+**Step 3:** Install node modules dependencies
 
 ```
 npm install or using yarn install
@@ -22,7 +24,7 @@ npm install or using yarn install
 
 *Before run android build, setup [Android Studio](https://facebook.github.io/react-native/docs/android-setup.html)*
 
-**Step 3:** Run apps React Native
+**Step 4:** Run apps React Native
 
 ```
 react-native run-android
