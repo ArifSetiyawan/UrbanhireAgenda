@@ -7,17 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "native-base": "^2.11.0",
+    "native-base": "^2.12.0",
     "react": "16.6.3",
     "react-native": "0.58.5",
     "react-native-calendars": "^1.22.0",
-    "react-native-modal": "^7.0.2",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^5.10.0",
-    "redux-promise-middleware": "^6.1.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
