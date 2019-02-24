@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, StatusBar } from 'react-native';
-import { Icon } from 'native-base';
 import { connect } from 'react-redux';
 
 import AgendaCalendars from '../components/AgendaCalendars';
@@ -31,20 +30,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f7f7f7'
-  },
-  button: {
-    backgroundColor: '#2ecc71',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 30,
-    right: 30
-  },
-  iconButton: {
-    color: '#fff'
   },
   header: {
     paddingHorizontal: 15,

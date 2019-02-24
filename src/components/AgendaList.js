@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, FlatList, Modal,Image} from 'react-native';
-import { Icon ,Container,Content,Card,CardItem,Body, H2 } from 'native-base';
+import { Icon ,Fab,Card,CardItem,Body, H2 } from 'native-base';
 import { connect } from 'react-redux';
 
 import { modalVisibleAgendaList, modalVisibleSet } from '../redux/actions/agenda';
@@ -47,12 +47,16 @@ class AgendaList extends Component {
         </View>
         {
           agendas.length === 0 ? (
-          <View style={{flex: 1}}>
+          <View>
             <Image source={require('../assets/image/datanot.png')} 
               style={styles.background} />
-            <TouchableOpacity onPress={() => this.handleVisibleModal(true,this.props.agenda.selectedDate)} style={styles.button}>
-              <Icon name='plus' type='AntDesign' style={styles.iconButton} />
-            </TouchableOpacity>
+            <Fab
+              containerStyle={{ justifyContent: 'center', alignItems: 'center'}}
+              style={{ backgroundColor: '#2ecc71'}}
+              position="bottomRight"
+              onPress={() => this.handleVisibleModal(true,this.props.agenda.selectedDate)}>
+              <Icon name="plus" type="AntDesign" />
+            </Fab>
             <Modal
               visible={this.props.agenda.modalVisibleAgenda}
               animationType='fade'
@@ -80,8 +84,8 @@ class AgendaList extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f7f7f7',
-    flex: 1,
-    width: '100%'
+    width: '85%',
+    borderRadius:5
   },
   header: {
     flexDirection: 'row',
@@ -106,17 +110,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 26
   },
-  button: {
-    backgroundColor: '#2ecc71',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 30,
-    right: 30
-  },
   iconButton: {
     color: '#fff'
   },
@@ -126,12 +119,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     alignSelf: 'center',
     width: '90%'
-  },
-  headerItem: {
-    borderBottomColor: '#ededed',
-    borderBottomWidth: 0.5,
-    justifyContent: 'center',
-    padding: 10
   },
   contentItem: {
     padding: 10,

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Provider, connect } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import { Provider} from 'react-redux';
 import Agenda from './src/screens/AgendaHome';
 
 import store from './src/redux/store';
