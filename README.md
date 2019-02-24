@@ -11,7 +11,7 @@
 **Step 3:** Install node modules dependencies
 
 ```
-npm install or using yarn install
+npm install
 ```
 
 *Before run android build, setup [Android Studio](https://facebook.github.io/react-native/docs/android-setup.html)*
