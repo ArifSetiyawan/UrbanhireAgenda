@@ -47,12 +47,12 @@ class AgendaList extends Component {
         </View>
         {
           agendas.length === 0 ? (
-          <View>
+          <View style={{flex:1}}>
             <Image source={require('../assets/image/datanot.png')} 
               style={styles.background} />
             <Fab
               containerStyle={{ justifyContent: 'center', alignItems: 'center'}}
-              style={{ backgroundColor: '#2ecc71'}}
+              style={styles.button}
               position="bottomRight"
               onPress={() => this.handleVisibleModal(true,this.props.agenda.selectedDate)}>
               <Icon name="plus" type="AntDesign" />
@@ -84,7 +84,8 @@ class AgendaList extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f7f7f7',
-    width: '85%',
+    width: '100%',
+    flex:1,
     borderRadius:5
   },
   header: {
@@ -102,6 +103,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     marginRight:10
+  },
+  button: {
+    backgroundColor: '#2ecc71',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonClose: {
     marginRight: 10
